@@ -32,17 +32,21 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     createParticles();
 
-    // Generate Field of 250 Flowers
+    // Generate Field of Flowers (Desktop: 250, Mobile: 60)
     function generateField() {
         // Clear just in case
         bouquetContainer.innerHTML = '';
         
-        for (let j = 0; j < 250; j++) {
+        const isMobile = window.innerWidth <= 768;
+        const numFlowers = isMobile ? 60 : 250;
+        
+        for (let j = 0; j < numFlowers; j++) {
             const flowerWrapper = document.createElement('div');
             flowerWrapper.classList.add('flower');
             
             // Random edge selection (0: top, 1: right, 2: bottom, 3: left)
-            const edge = Math.floor(Math.random() * 4);
+            // Si es móvil (ancho <= 768), forzamos a que salgan solo de abajo (borde 2)
+            const edge = isMobile ? 2 : Math.floor(Math.random() * 4);
             const offset = Math.random() * 100 + '%';
             
             let rotation = 0;
@@ -67,7 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const height = (Math.random() * 170 + 80) + 'px'; 
             const scale = Math.random() * 0.5 + 0.3; 
             const delay = Math.random() * 4000;
-            const zIndex = Math.floor(Math.random() * 250);
+            const zIndex = Math.floor(Math.random() * numFlowers);
 
             flowerWrapper.style.zIndex = zIndex;
             flowerWrapper.dataset.scale = scale;
