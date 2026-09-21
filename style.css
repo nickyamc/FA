@@ -1,0 +1,206 @@
+:root {
+    /* Light Theme Variables */
+    --bg-color: #f0f8ff;
+    --text-color: #333;
+    --card-bg: rgba(255, 255, 255, 0.6);
+    --card-border: rgba(255, 255, 255, 0.3);
+    --flower-glow: 0 0 20px rgba(255, 204, 0, 0.4);
+    --intro-bg: rgba(240, 248, 255, 0.95);
+    
+    /* Global Variables */
+    --primary-yellow: #ffcc00;
+    --dark-yellow: #e6b800;
+    --stem-green: #4caf50;
+    --dark-green: #388e3c;
+    --transition-speed: 0.5s;
+}
+
+[data-theme="dark"] {
+    /* Dark Theme Variables */
+    --bg-color: #121212;
+    --text-color: #fff;
+    --card-bg: rgba(30, 30, 30, 0.6);
+    --card-border: rgba(255, 255, 255, 0.1);
+    --flower-glow: 0 0 30px rgba(255, 204, 0, 0.8), 0 0 60px rgba(255, 204, 0, 0.5);
+    --intro-bg: rgba(18, 18, 18, 0.95);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Outfit', sans-serif;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: background-color var(--transition-speed), color var(--transition-speed);
+    overflow: hidden;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Intro Screen */
+.intro-screen {
+    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+    background-color: var(--intro-bg); z-index: 1000;
+    display: flex; justify-content: center; align-items: center;
+    transition: opacity 1s ease-out;
+}
+
+.start-btn {
+    padding: 15px 30px; font-size: 1.2rem; font-weight: 600; color: #fff;
+    background: linear-gradient(45deg, var(--dark-yellow), var(--primary-yellow));
+    border: none; border-radius: 30px; cursor: pointer;
+    box-shadow: 0 4px 15px rgba(255, 204, 0, 0.4);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.start-btn:hover { transform: scale(1.05); box-shadow: 0 6px 20px rgba(255, 204, 0, 0.6); }
+
+/* Theme Switch */
+.theme-switch { position: absolute; top: 20px; right: 20px; display: inline-block; width: 60px; height: 34px; z-index: 10; }
+.theme-switch input { opacity: 0; width: 0; height: 0; }
+.slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #ccc; transition: .4s; border-radius: 34px; display: flex; justify-content: space-between; align-items: center; padding: 0 5px; }
+.slider:before { position: absolute; content: ""; height: 26px; width: 26px; left: 4px; bottom: 4px; background-color: white; transition: .4s; border-radius: 50%; z-index: 2; }
+input:checked + .slider { background-color: #2196F3; }
+input:checked + .slider:before { transform: translateX(26px); }
+.icon { font-size: 14px; }
+
+/* Container */
+.container { position: relative; width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; }
+
+/* Glassmorphism Card */
+.glass-card {
+    background: var(--card-bg);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-top: 1px solid rgba(255, 255, 255, 0.7);
+    border-left: 1px solid rgba(255, 255, 255, 0.7);
+    border-radius: 25px;
+    padding: 40px;
+    max-width: 550px;
+    text-align: center;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2), inset 0 0 20px rgba(255, 255, 255, 0.2);
+    z-index: 500;
+    transform: translateY(50px) scale(0.9);
+    opacity: 0;
+    pointer-events: none;
+    transition: all 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    margin: 20px;
+    position: relative;
+    overflow: hidden;
+}
+.glass-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, transparent 60%);
+    transform: rotate(45deg);
+    pointer-events: none;
+}
+.glass-card.show { transform: translateY(0) scale(1); opacity: 1; pointer-events: auto; }
+.glass-card h1 { font-size: 2.5rem; margin-bottom: 15px; color: var(--primary-yellow); text-shadow: 2px 2px 4px rgba(0,0,0,0.2); font-weight: 700;}
+.recipient-name { font-weight: 400; font-size: 1.4rem; margin-bottom: 25px; border-bottom: 2px solid var(--primary-yellow); display: inline-block; padding-bottom: 8px; letter-spacing: 1px;}
+.glass-card p { font-size: 1.1rem; line-height: 1.6; font-weight: 300; text-shadow: 1px 1px 1px rgba(0,0,0,0.1); }
+
+/* Flower Frame Container */
+.bouquet {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    z-index: 1;
+}
+
+/* Individual Flower */
+.flower {
+    position: absolute;
+    width: 0; 
+    height: 0;
+    /* The origin is exactly at the edge point */
+    transition: transform 2.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Stem */
+.stem {
+    width: 10px;
+    /* Height is set inline */
+    background: linear-gradient(to top, var(--dark-green), var(--stem-green));
+    border-radius: 5px;
+    position: absolute;
+    bottom: 0;
+    left: -5px; /* Centered on origin */
+    z-index: 1;
+}
+
+/* Leaves */
+.leaf {
+    width: 30px;
+    height: 50px;
+    background: var(--stem-green);
+    border-radius: 50% 0 50% 0;
+    position: absolute;
+    z-index: 2;
+}
+.leaf-left { left: -30px; bottom: 40px; transform: rotate(-30deg); }
+.leaf-right { left: 0px; bottom: 50px; transform: rotate(30deg) scaleX(-1); }
+
+/* Flower Head (Center + Petals) */
+.flower-head {
+    position: absolute;
+    /* Top (negative height) set inline by JS */
+    left: 0;
+    width: 0; 
+    height: 0;
+    z-index: 3;
+    animation: sway 6s ease-in-out infinite alternate;
+}
+
+/* Old Simple Center */
+.center {
+    width: 50px;
+    height: 50px;
+    background-color: #6b4c1a;
+    border-radius: 50%;
+    position: absolute;
+    top: -25px; /* Centered on flower-head origin */
+    left: -25px;
+    z-index: 10;
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
+}
+
+/* Old Simple Petal */
+.petal {
+    position: absolute;
+    bottom: 0; /* Anchored to flower-head origin */
+    left: -20px; /* Centered on origin (width is 40) */
+    width: 40px;
+    height: 100px;
+    background: linear-gradient(to top, var(--primary-yellow), #fffde7);
+    border-radius: 50% 50% 20% 20%;
+    transform-origin: bottom center;
+    box-shadow: var(--flower-glow);
+    opacity: 0;
+    transition: opacity 1.5s ease-in-out, transform 2s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.flower.bloom .petal { opacity: 1; }
+
+@keyframes sway {
+    0% { transform: translateX(-50%) translateY(-50%) rotate(-5deg); }
+    100% { transform: translateX(-50%) translateY(-50%) rotate(5deg); }
+}
+
+/* Particles */
+.particles { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+.particle { position: absolute; width: 10px; height: 10px; background-color: rgba(255, 204, 0, 0.6); border-radius: 50%; animation: float 10s linear infinite; }
+@keyframes float { 0% { transform: translateY(100vh) translateX(0); opacity: 0;} 10% { opacity: 1; } 90% { opacity: 1; } 100% { transform: translateY(-100px) translateX(100px); opacity: 0; } }

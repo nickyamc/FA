@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sorpresa - 21 de Septiembre</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Intro overlay to capture click and start audio -->
+    <div id="intro-screen" class="intro-screen">
+        <button id="start-btn" class="start-btn">Toca para abrir tu sorpresa ✨</button>
+    </div>
+
+    <!-- Theme Toggle -->
+    <label class="theme-switch" for="checkbox">
+        <input type="checkbox" id="checkbox" />
+        <div class="slider round">
+            <span class="icon sun">☀️</span>
+            <span class="icon moon">🌙</span>
+        </div>
+    </label>
+
+    <div class="particles" id="particles"></div>
+
+    <main class="container">
+        
+        <div class="flower-container bouquet" id="bouquet-container">
+            <!-- Las flores/girasoles se generarán aquí con JavaScript para facilitar la creación de un arreglo grande -->
+        </div>
+
+        <div class="glass-card message-card" id="message-card">
+            <h1>Feliz 21 de Septiembre</h1>
+            <h2 class="recipient-name">Para: <span id="nombre-receptor">Alguien Especial</span></h2>
+            <p>
+                Dicen que regalar flores amarillas significa desear alegría, luz y amor para siempre. 
+                Quería darte este pequeño detalle para recordarte lo especial que eres y desearte un 
+                feliz inicio de primavera. ¡Que tu día brille tanto como tú! ✨🌻
+            </p>
+        </div>
+
+    </main>
+
+    <!-- Floricienta song audio element -->
+    <audio id="bg-music" loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg"> 
+        <!-- Para la versión real, puedes descargar mp3 de flores amarillas y colocar aquí el archivo local ej: src="flores-amarillas.mp3" -->
+    </audio>
+
+    <script src="script.js"></script>
+</body>
+</html>
