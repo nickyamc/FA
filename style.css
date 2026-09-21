@@ -108,7 +108,7 @@ input:checked + .slider:before { transform: translateX(26px); }
 }
 .glass-card.show { transform: translateY(0) scale(1); opacity: 1; pointer-events: auto; }
 .glass-card h1 { font-size: 2.5rem; margin-bottom: 15px; color: var(--primary-yellow); text-shadow: 2px 2px 4px rgba(0,0,0,0.2); font-weight: 700;}
-.recipient-name { font-weight: 400; font-size: 1.4rem; margin-bottom: 25px; border-bottom: 2px solid var(--primary-yellow); display: inline-block; padding-bottom: 8px; letter-spacing: 1px;}
+.recipient-name { font-weight: 600; font-size: 2rem; margin-bottom: 25px; color: var(--primary-yellow); text-shadow: 0 0 10px rgba(255, 204, 0, 0.8), 0 0 20px rgba(255, 204, 0, 0.6), 0 0 30px rgba(255, 204, 0, 0.4); display: inline-block; letter-spacing: 2px; }
 .glass-card p { font-size: 1.1rem; line-height: 1.6; font-weight: 300; text-shadow: 1px 1px 1px rgba(0,0,0,0.1); }
 
 /* Flower Frame Container */
